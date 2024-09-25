@@ -6,7 +6,7 @@ import backend.academy.model.Difficulty;
 import lombok.extern.log4j.Log4j2;
 import java.util.*;
 
-// Основной класс Console для работы приложения.
+/// Основной класс Console для работы приложения.
 @Log4j2
 public class Console {
 
@@ -15,23 +15,24 @@ public class Console {
     public static Scanner scanner = new Scanner(System.in);
 
     // Экземпляр словаря для получения слова для угадывания.
-    public static Dictionary dictionary = new Dictionary();
+    public static Dictionary dictionary;
 
-    // Метод для завершения работы программы.
+    /// Метод для завершения работы программы.
     public static void exit() {
         System.out.println("Exiting...");
         System.exit(0);
     }
 
-    // Метод для очистки окна консоли.
+    /// Метод для очистки окна консоли.
     public static void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    // Метод для отображения окна входа в программу.
+    /// Метод для отображения окна входа в программу.
     public static void start() throws Exception {
         try {
+            dictionary = new Dictionary();
             clear();
             System.out.println("Welcome to a Hangman game!\n==========================");
 
@@ -47,7 +48,7 @@ public class Console {
 
                 switch (choice) {
                     case "1":
-                        getWord();
+                        selectContent();
                         break;
                     case "q", "Q":
                         exit();
@@ -64,13 +65,15 @@ public class Console {
         }
     }
 
-    // Метод для получения слова для новой игры.
-    private static void getWord() throws Exception {
+    /// Метод для получения слова для новой игры.
+    private static void selectContent() throws Exception {
         clear();
         boolean settingsFlag = false;
+        Difficulty difficulty;
+        Category category;
         do {
-            Difficulty difficulty = getDifficulty();
-            Category category = getCategory();
+            difficulty = getDifficulty();
+            category = getCategory();
 
             boolean choiceFlag = false;
             do {
@@ -95,9 +98,11 @@ public class Console {
                 }
             } while (!choiceFlag);
         } while (!settingsFlag);
+
+        //GameSession.startGame(dictionary.getRandomWord(difficulty, category));
     }
 
-    // Метод для получения уровня сложности для новой игры.
+    /// Метод для получения уровня сложности для новой игры.
     private static Difficulty getDifficulty() throws Exception {
         clear();
         Random random = new Random();
@@ -127,7 +132,7 @@ public class Console {
         }
     }
 
-    // Метод для получения категории слова для новой игры.
+    /// Метод для получения категории слова для новой игры.
     private static Category getCategory() throws Exception {
         clear();
         Random random = new Random();

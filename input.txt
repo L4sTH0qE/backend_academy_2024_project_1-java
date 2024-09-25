@@ -1,0 +1,120 @@
+0;Cat;0;A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws
+0;Dog;0;A domesticated carnivorous mammal that is often kept as a pet and known for its loyalty and companionship
+0;Fish;0;A cold-blooded vertebrate animal that lives in water, has gills, fins, and typically scales
+0;Bird;0;A warm-blooded vertebrate characterized by feathers, wings, and beaks, most of which can fly
+0;Frog;0;An amphibian with a smooth, moist skin, long hind legs for jumping, and typically lives both in water and on land
+0;Lion;1;A large wild cat known for its strength and social behavior, often referred to as the "king of the jungle
+0;Tiger;1;A large striped wild cat native to Asia, known for its strength and beauty
+0;Rabbit;1;A small mammal with long ears, short fluffy tail, and strong hind legs
+0;Giraffe;1;A tall African mammal with a very long neck and legs
+0;Dolphin;1;A highly intelligent marine mammal known for its playful behavior and social nature
+0;Elephant;2;The largest land mammal, known for its trunk, large ears, and intelligence
+0;Rhinoceros;2;A large herbivorous mammal known for its thick skin and one or two horns on its snout
+0;Alligator;2;A large reptile found in freshwater environments, known for its powerful jaws and armored body
+0;Hippopotamus;2;A large semi-aquatic mammal native to Africa, known for its massive size and aggressive behavior
+0;Ostrich;2;The world's largest bird, native to Africa, known for its inability to fly but exceptional running speed
+1;Apple;0;A round fruit with red, green, or yellow skin and a crisp flesh
+1;Bread;0;A staple food made from flour and water that is usually baked
+1;Milk;0;A white liquid produced by mammals that is used as food; rich in nutrients
+1;Rice;0;A staple grain that is a primary food source for many cultures around the world
+1;Cheese;0;A dairy product made from curdled milk, available in various textures and flavors
+1;Pizza;1;A dish consisting of a round base of dough topped with cheese, sauce, and various toppings
+1;Salad;1;A dish consisting of mixed vegetables or fruits, often served cold
+1;Sandwich;1;Food consisting of two or more slices of bread with various fillings in between
+1;Banana;1;A long curved fruit with a yellow peel and soft sweet flesh
+1;Chocolate;1;A sweet food made from roasted and ground cacao seeds, often enjoyed as a treat
+1;Pomegranate;2;A fruit with a tough outer skin and many seeds surrounded by juicy pulp
+1;Quinoa;2;A grain-like seed that is high in protein and often used as a health food
+1;Avocado;2;A creamy-textured fruit with a large pit, often used in salads and spreads
+1;Eggplant;2;A purple vegetable also known as aubergine, used in cooking
+1;Cabbage;2;A leafy green vegetable that can be eaten raw or cooked
+2;Shirt;0;A garment worn on the upper body, typically with sleeves and a collar
+2;Pants;0;Trousers that cover the legs, worn by both men and wome
+2;Dress;0;A one-piece garment for women or girls that covers the body and extends down over the legs
+2;Hat;0;A head covering worn for warmth, fashion, or protection from the sun
+2;Shoes;0;Footwear designed to protect the feet and provide comfort while walking
+2;Jacket;1;An outer garment that covers the upper body and arms, typically with buttons or a zipper
+2;Sweater;1;A knitted garment worn on the upper body for warmth
+2;Skirt;1;A garment that hangs from the waist and covers part or all of the legs
+2;Scarf;1;A piece of cloth worn around the neck for warmth or fashion
+2;Gloves;1;Hand coverings that protect or keep the hands warm
+2;Overcoat;2;A long coat worn over other clothing for warmth
+2;Jumpsuit;2;A one-piece garment that covers the body and legs
+2;Blouse;2;A loose-fitting upper garment typically worn by women
+2;Tuxedo;2;A formal suit typically worn for evening events
+2;Overalls;2;A one-piece garment worn over regular clothes to protect them
+3;Tree;0;A perennial plant with an elongated stem (trunk) supporting branches and leaves
+3;Rock;0;A solid mineral material forming part of the surface of the earth
+3;Lake;0;A large body of freshwater surrounded by land
+3;River;0;A large natural stream of water flowing toward an ocean or lake
+3;Cloud;0;A visible mass of condensed water vapor floating in the atmosphere
+3;Mountain;1;A large landform that rises prominently above its surroundings, usually with steep slopes
+3;Desert;1;A barren area of land where little precipitation occurs and living conditions are hostile for plant and animal life
+3;Ocean;1;A vast body of saltwater that covers almost three quarters of the Earth's surface
+3;Volcano;1;An opening in the Earth's crust through which molten lava, ash, and gases are expelled
+3;Canyon;1;A deep gorge, typically one with a river running through it
+3;Savannah;2;A grassy plain in tropical and subtropical regions, with few trees
+3;Tundra;2;A cold, treeless region where the subsoil is permanently frozen (permafrost)
+3;Rainforest;2;A dense forest rich in biodiversity found in tropical areas with heavy rainfall
+3;Glacier;2;A slow-moving mass of ice formed from compacted snow over many years
+3;Waterfall;2;A flow of water over the edge of a cliff or steep incline
+4;Ball;0;A spherical object used in various games and sports
+4;Golf;0;A sport where players hit a small ball into a series of holes on a course using clubs
+4;Swim;0;To move through water by using the limbs or body
+4;Run;0;To move at a speed faster than walking by using one's legs
+4;Jump;0;To push oneself off the ground and into the air using one's legs
+4;Tennis;1;A sport played on a court where players hit a ball back and forth over a net using rackets
+4;Soccer;1;A team sport played with a round ball on a rectangular field with goals at each end
+4;Hockey;1;A team sport played on ice or field where players use sticks to hit a puck or ball into a goal
+4;Boxing;1;A combat sport where two opponents fight using their fists while wearing gloves within a ring
+4;Baseball;1;A bat-and-ball game played between two teams where players try to score runs by hitting a ball and running around bases
+4;Gymnastics;2;A sport involving exercises requiring physical strength, flexibility, balance, and coordination
+4;Fencing;2;A sport involving sword fighting with specific rules and protective gear
+4;Rugby;2;A team sport played with an oval ball on a field where players aim to score points by carrying or kicking the ball into the opponent's goal area
+4;Skateboarding;2;An action sport involving riding on a skateboard while performing tricks and maneuvers
+4;Archery;2;The sport of shooting arrows with a bow
+5;Phone;0;An electronic device used for communication through voice calls or text messages
+5;Tablet;0;A portable touchscreen computer that is larger than a smartphone but smaller than a laptop
+5;Mouse;0;A hand-held device used to control the movement of a cursor on a computer screen
+5;Keyboard;0;An input device consisting of keys used to type text into a computer or other devices
+5;Screen;0;The display surface of a computer or television where images and information are shown
+5;Internet;1;A global network connecting millions of private, public, academic, business, and government networks for communication and information sharing
+5;Laptop;1;A portable personal computer that can be used on one's lap or carried around easily
+5;Software;1;Programs and applications that run on computers or devices to perform specific tasks
+5;Website;1;A collection of related web pages located under a single domain name on the Internet
+5;Robot;1;A machine capable of carrying out complex tasks automatically, often programmable by a computer
+5;Algorithm;2;A set of rules or procedures to solve a problem or accomplish a task, often used in computer programming
+5;Encryption;2;The process of converting information into a code to secure it from unauthorized access
+5;Biometrics;2;The measurement and statistical analysis of people’s unique physical and behavioral characteristics
+5;Automation;2;Mechanization
+5;Cybersecurity;2;The practice of protecting systems, networks, and programs from digital attacks
+6;Joy;0;A feeling of great pleasure and happiness, often resulting from a positive experience or achievement
+6;Sadness;0;An emotional state characterized by feelings of sorrow, disappointment, or unhappiness, often in response to loss or difficult situations
+6;Anger;0;A strong feeling of annoyance, displeasure, or hostility, often triggered by perceived injustice or frustration
+6;Fear;0;An emotional response to a perceived threat or danger, which can trigger a fight-or-flight response
+6;Love;0;A complex set of emotions characterized by affection, attachment, care, and deep connection towards others
+6;Surprise;1;An emotional reaction to an unexpected event or situation, which can be positive or negative
+6;Happiness;1;A state of well-being and contentment, often resulting from positive experiences or fulfilling relationships
+6;Anxiety;1;A feeling of worry, nervousness, or unease about something with an uncertain outcome, often accompanied by physical symptoms
+6;Sorrow;1;A deep feeling of distress or sadness, typically in response to loss, disappointment, or regret
+6;Excitement;1;A heightened state of enthusiasm and eagerness, often related to anticipation of something positive
+6;Frustration;2;A feeling of annoyance or dissatisfaction resulting from an inability to achieve a goal or meet a desire
+6;Despair;2;A state of complete loss of hope, often accompanied by feelings of helplessness
+6;Astonishment;2;A state of being greatly surprised or impressed; a feeling of shock due to unexpected events
+6;Joviality;2;A cheerful and friendly mood; characterized by good humor and high spirits
+6;Revolt;2;A strong emotional reaction against authority or tradition; can involve feelings of anger and defiance
+7;Doctor;0;A person you go to see when you are ill or have some type of health problem
+7;Teacher;0;A person that passes knowledge to students
+7;Nurse;0;A person trained to help a doctor look after the sick or injured
+7;Chef;0;A person that prepared food for others
+7;Pilot;0;A person who flies a plane
+7;Architect;1;A person that designs building and houses
+7;Engineer;1;A person who develops solutions to technical problems
+7;Lawyer;1;A person that defends people in court and gives legal advice
+7;Scientist;1;They do many experiments
+7;Accountant;1;A person that works with the money in company
+7;Butcher;2;They cut the meat and sell it in their shop
+7;Bricklayer;2;A person that helps to build houses using bricks
+7;Hairdresser;2;They cut your hair or give it a new style
+7;Tailor;2;A person that makes clothes for others
+7;Optician;2;A person that checks your eyes and try and correct any problems with your sight

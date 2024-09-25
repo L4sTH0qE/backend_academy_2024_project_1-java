@@ -1,5 +1,6 @@
 package backend.academy.model;
 
+/// Класс-перечисление для категории слова.
 public enum Category {
     ANIMALS,
     FOOD,
