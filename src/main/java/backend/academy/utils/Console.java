@@ -99,7 +99,7 @@ public class Console {
             } while (!choiceFlag);
         } while (!settingsFlag);
 
-        //GameSession.startGame(dictionary.getRandomWord(difficulty, category));
+        GameSession.startGame(dictionary.getRandomWord(difficulty, category));
     }
 
     /// Метод для получения уровня сложности для новой игры.
