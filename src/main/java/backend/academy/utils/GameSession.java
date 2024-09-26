@@ -3,6 +3,7 @@ package backend.academy.utils;
 import backend.academy.model.Difficulty;
 import backend.academy.model.GameState;
 import backend.academy.model.Word;
+import lombok.Getter;
 
 /// Класс GameSession для реализации игрового процесса.
 public final class GameSession {
@@ -19,25 +20,29 @@ public final class GameSession {
     private static final int HARD_MAX_ATTEMPTS = 5;
 
     // Объект для хранения информации о текущем состоянии игры.
-    private static GameState gameState;
+    @Getter private static GameState gameState;
 
     /// Основной метод игровой сессии.
     @SuppressWarnings("RegexpSinglelineJava")
-    public static void startGame(Word word) {
+    public static void startGame(Word word) throws IllegalArgumentException {
         AppService.clear();
+        if (!word.word().matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("Generated word has incorrect format! Please, try again later.");
+        }
+
         int attempts = word.difficulty() == Difficulty.EASY ? EASY_MAX_ATTEMPTS
             : word.difficulty() == Difficulty.MEDIUM ? MEDIUM_MAX_ATTEMPTS : HARD_MAX_ATTEMPTS;
         gameState = new GameState(attempts, word.word(), word.hint());
 
         while (true) {
-            drawHangman();
+            drawHangman(gameState.attemptsLeft());
             displayGameState();
-            System.out.print("\nYour input> ");
+            AppService.printInput();
             String choice = AppService.SCANNER.nextLine().toUpperCase();
             System.out.println();
             AppService.clear();
 
-            if (choice.length() != 1) {
+            if (!checkUserInput(choice)) {
                 AppService.printInvalidCommand();
                 continue;
             }
@@ -78,7 +83,7 @@ public final class GameSession {
         AppService.clear();
         System.out.println("\nGame over!");
         System.out.println(gameState.attemptsLeft() == 0 ? "You lost :(" : "You won :)");
-        drawHangman();
+        drawHangman(gameState.attemptsLeft());
         System.out.println("The word is \"" + word + "\"\n");
         System.out.print("\nPress 'Enter' to return to Main menu");
         AppService.printInput();
@@ -88,8 +93,8 @@ public final class GameSession {
 
     /// Метод для отрисовки текущего состояния виселицы.
     @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber"})
-    public static void drawHangman() {
-        switch (gameState.attemptsLeft()) {
+    public static void drawHangman(int attemptsLeft) {
+        switch (attemptsLeft) {
             case 7:
                 System.out.println("""
                 +---+
@@ -181,5 +186,15 @@ public final class GameSession {
         System.out.println("Hint: " + gameState.getHint());
         System.out.println("Guessed letters: " + gameState.getGuessedLettersAsString());
         System.out.println("Attempts left: " + gameState.attemptsLeft());
+    }
+
+    /// Метод для проверки пользовательского ввода во время игры.
+    public static boolean checkUserInput(String userInput) {
+        if (userInput.length() != 1) {
+            return false;
+
+        }
+        char letter = userInput.charAt(0);
+        return letter == '1' || (letter >= 'A' && letter <= 'Z');
     }
 }

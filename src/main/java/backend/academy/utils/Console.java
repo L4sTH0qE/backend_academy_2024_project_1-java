@@ -87,7 +87,6 @@ public final class Console {
                 }
             } while (!choiceFlag);
         } while (!settingsFlag);
-
         GameSession.startGame(dictionary.getRandomWord(difficulty, category));
     }
 
