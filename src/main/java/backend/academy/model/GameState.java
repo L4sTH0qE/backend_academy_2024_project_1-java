@@ -1,25 +1,33 @@
 package backend.academy.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
-/// Класс для описания текущего состояния, количества сделанных попыток, максимального количества попыток и сообщений для пользователя.
+/// Класс для описания текущего состояния, количества сделанных попыток,
+/// максимального количества попыток и сообщений для пользователя.
 public class GameState {
-    private int[] guessedLetters = new int[26];
+
+    // Константа для описания длины алфавита для игры (латинского).
+    private static final int ALPHABET_LENGTH = 26;
+
+    // Угаданные буквы.
+    private int[] guessedLetters = new int[ALPHABET_LENGTH];
+
+    // Количество оставшихся попыток.
     @Getter private int attemptsLeft;
 
-    // Поле хранит текущее состояние угадываемого слова.
+    // Текущее состояние угадываемого слова.
     private char[] currentWord;
 
-    // Поле хранит слово для угадывания.
+    // Слово для угадывания.
     private final String correctWord;
 
-    // Поле хранит подсказку к слову для угадывания.
+    // Подсказка к слову для угадывания.
     private final String hint;
 
+    // Плейсхолдер подсказки (если не активна).
     private final String hintPlaceholder = "<Enter 1 if you want to get a hint>";
 
-    // Флаг указывает, активна ли подсказка к слову для угадывания.
+    // Активна ли подсказка к слову для угадывания.
     private boolean isHintActive;
 
     /// Конструктор с инициализацией основных полей для описания состояния игры.
@@ -58,7 +66,9 @@ public class GameState {
 
     /// Метод для проверки, была ли окончена игровая сессия.
     public boolean checkGameStatus() {
-        if (attemptsLeft <= 0) return true;
+        if (attemptsLeft <= 0) {
+            return true;
+        }
 
         for (char c : currentWord) {
             if (c == '_') {
@@ -73,7 +83,7 @@ public class GameState {
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < guessedLetters.length; ++i) {
             if (guessedLetters[i] == 1) {
-                res.append((char)('A' + i)).append(" ");
+                res.append((char) ('A' + i)).append(' ');
             }
         }
         return res.toString();

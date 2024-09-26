@@ -5,37 +5,44 @@ import backend.academy.model.GameState;
 import backend.academy.model.Word;
 
 /// Класс GameSession для реализации игрового процесса.
-public class GameSession {
+public final class GameSession {
+
+    // Конструктор.
+    private GameSession() {
+    }
 
     // Константы для описания количества попыток на разных уровнях сложности.
-    public static final int EASY_MAX_ATTEMPTS = 7;
+    private static final int EASY_MAX_ATTEMPTS = 7;
 
-    public static final int MEDIUM_MAX_ATTEMPTS = 6;
+    private static final int MEDIUM_MAX_ATTEMPTS = 6;
 
-    public static final int HARD_MAX_ATTEMPTS = 5;
+    private static final int HARD_MAX_ATTEMPTS = 5;
 
     // Объект для хранения информации о текущем состоянии игры.
-    public static GameState gameState;
+    private static GameState gameState;
 
     /// Основной метод игровой сессии.
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void startGame(Word word) {
-        Console.clear();
-        int attempts = word.difficulty() == Difficulty.EASY ? EASY_MAX_ATTEMPTS : word.difficulty() == Difficulty.MEDIUM ? MEDIUM_MAX_ATTEMPTS : HARD_MAX_ATTEMPTS;
+        AppService.clear();
+        int attempts = word.difficulty() == Difficulty.EASY ? EASY_MAX_ATTEMPTS
+            : word.difficulty() == Difficulty.MEDIUM ? MEDIUM_MAX_ATTEMPTS : HARD_MAX_ATTEMPTS;
         gameState = new GameState(attempts, word.word(), word.hint());
 
         while (true) {
             drawHangman();
             displayGameState();
             System.out.print("\nYour input> ");
-            String choice = Console.scanner.nextLine().toUpperCase();
+            String choice = AppService.SCANNER.nextLine().toUpperCase();
             System.out.println();
-            Console.clear();
+            AppService.clear();
 
             if (choice.length() != 1) {
-                System.out.println("Invalid command.\n================");
+                AppService.printInvalidCommand();
                 continue;
             }
-            if (choice.equals("1")) {
+            char letter = choice.charAt(0);
+            if (letter == '1') {
                 boolean flag = gameState.updateHintStatus();
                 if (!flag) {
                     System.out.println("Hint is already activated!\n==========================");
@@ -44,7 +51,6 @@ public class GameSession {
                 }
                 continue;
             }
-            char letter = choice.charAt(0);
             if (letter >= 'A' && letter <= 'Z') {
                 if (!gameState.tryGuessLetter(letter)) {
                     System.out.println("Letter is already guessed!\n==========================");
@@ -61,25 +67,27 @@ public class GameSession {
                 }
                 continue;
             }
-            System.out.println("Invalid command.\n================");
+            AppService.printInvalidCommand();
         }
         gameOver(word.word());
     }
 
     /// Метод для завершения игровой сессии.
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void gameOver(String word) {
-        Console.clear();
+        AppService.clear();
         System.out.println("\nGame over!");
         System.out.println(gameState.attemptsLeft() == 0 ? "You lost :(" : "You won :)");
         drawHangman();
         System.out.println("The word is \"" + word + "\"\n");
-        System.out.println("Press 'Enter' to return to Main menu");
-        System.out.print("Your input> ");
-        Console.scanner.nextLine();
+        System.out.print("\nPress 'Enter' to return to Main menu");
+        AppService.printInput();
+        AppService.SCANNER.nextLine();
         System.out.println();
     }
 
     /// Метод для отрисовки текущего состояния виселицы.
+    @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber"})
     public static void drawHangman() {
         switch (gameState.attemptsLeft()) {
             case 7:
@@ -167,10 +175,11 @@ public class GameSession {
     }
 
     /// Метод для отрисовки текущего состояния угадываемого слова.
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void displayGameState() {
         System.out.println("Word: " + gameState.getCurrentWordAsString());
         System.out.println("Hint: " + gameState.getHint());
         System.out.println("Guessed letters: " + gameState.getGuessedLettersAsString());
-        System.out.println("Attempts: " + gameState.attemptsLeft());
+        System.out.println("Attempts left: " + gameState.attemptsLeft());
     }
 }

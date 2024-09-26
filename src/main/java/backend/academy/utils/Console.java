@@ -4,36 +4,24 @@ import backend.academy.model.Category;
 import backend.academy.model.Dictionary;
 import backend.academy.model.Difficulty;
 import lombok.extern.log4j.Log4j2;
-import java.util.*;
 
 /// Основной класс Console для работы приложения.
 @Log4j2
-public class Console {
+public final class Console {
 
-    // Для получения ввода пользователя используется объект типа Scanner из состава JDK(JRE) API
-    // Для инициализации scanner'а используется объект стандартного потока ввода - System.in
-    public static Scanner scanner = new Scanner(System.in);
+    // Конструктор.
+    private Console() {
+    }
 
     // Экземпляр словаря для получения слова для угадывания.
-    public static Dictionary dictionary;
-
-    /// Метод для завершения работы программы.
-    public static void exit() {
-        System.out.println("Exiting...");
-        System.exit(0);
-    }
-
-    /// Метод для очистки окна консоли.
-    public static void clear() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+    private static Dictionary dictionary;
 
     /// Метод для отображения окна входа в программу.
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void start() throws Exception {
         try {
             dictionary = new Dictionary();
-            clear();
+            AppService.clear();
             System.out.println("Welcome to a Hangman game!\n==========================");
 
             // Выводим меню и ждем выбора пользователя, пока не будет выбрана опция "q" (завершение работы)
@@ -41,9 +29,9 @@ public class Console {
                 System.out.println("Main menu");
                 System.out.println("1 - Start new game");
                 System.out.println("q - Exit");
-                System.out.print("\nYour input> ");
+                AppService.printInput();
 
-                String choice = Console.scanner.nextLine();
+                String choice = AppService.SCANNER.nextLine();
                 System.out.println();
 
                 switch (choice) {
@@ -51,23 +39,24 @@ public class Console {
                         selectContent();
                         break;
                     case "q", "Q":
-                        exit();
+                        AppService.exit();
                         break;
                     default:
-                        System.out.println("Invalid command.\n================");
+                        AppService.printInvalidCommand();
                 }
             }
             // Если возникла ошибка во время работы программы.
         } catch (Exception ex) {
             log.error("An unexpected error occurred while the program was running!");
             log.error("Details: {}", ex.getMessage());
-            Console.exit();
+            AppService.exit();
         }
     }
 
     /// Метод для получения слова для новой игры.
+    @SuppressWarnings("RegexpSinglelineJava")
     private static void selectContent() throws Exception {
-        clear();
+        AppService.clear();
         boolean settingsFlag = false;
         Difficulty difficulty;
         Category category;
@@ -80,9 +69,9 @@ public class Console {
                 System.out.println(
                     "Game settings: Difficulty - " + difficulty.name() + ", Word category - " + category.name() + ".");
                 System.out.println("Do you want to keep these settings (y/n)?");
-                System.out.print("\nYour input> ");
+                AppService.printInput();
 
-                String choice = Console.scanner.nextLine();
+                String choice = AppService.SCANNER.nextLine();
                 System.out.println();
 
                 switch (choice) {
@@ -94,7 +83,7 @@ public class Console {
                         choiceFlag = true;
                         break;
                     default:
-                        System.out.println("Invalid input.\n==============");
+                        AppService.printInvalidCommand();
                 }
             } while (!choiceFlag);
         } while (!settingsFlag);
@@ -103,39 +92,49 @@ public class Console {
     }
 
     /// Метод для получения уровня сложности для новой игры.
+    @SuppressWarnings("RegexpSinglelineJava")
     private static Difficulty getDifficulty() throws Exception {
-        clear();
-        Random random = new Random();
+        AppService.clear();
         while (true) {
             System.out.println("Choose difficulty or leave an empty input to skip this setting:");
             System.out.println("1 - Easy");
             System.out.println("2 - Medium");
             System.out.println("3 - Hard");
             System.out.println("\n* Level of difficulty affects word to guess and number of attempts *");
-            System.out.print("\nYour input> ");
+            AppService.printInput();
 
-            String choice = Console.scanner.nextLine();
+            String choice = AppService.SCANNER.nextLine();
             System.out.println();
+            Difficulty difficulty = Difficulty.EASY;
+            boolean flag = true;
 
             switch (choice) {
                 case "1":
-                    return Difficulty.EASY;
+                    difficulty = Difficulty.EASY;
+                    break;
                 case "2":
-                    return Difficulty.MEDIUM;
+                    difficulty = Difficulty.MEDIUM;
+                    break;
                 case "3":
-                    return Difficulty.HARD;
+                    difficulty = Difficulty.HARD;
+                    break;
                 case "":
-                    return Difficulty.values()[random.nextInt(0, 3)];
+                    difficulty = Difficulty.values()[AppService.SECURE_RANDOM.nextInt(Difficulty.values().length)];
+                    break;
                 default:
-                    System.out.println("Invalid command.\n================");
+                    AppService.printInvalidCommand();
+                    flag = false;
+            }
+            if (flag) {
+                return difficulty;
             }
         }
     }
 
     /// Метод для получения категории слова для новой игры.
+    @SuppressWarnings("RegexpSinglelineJava")
     private static Category getCategory() throws Exception {
-        clear();
-        Random random = new Random();
+        AppService.clear();
         while (true) {
             System.out.println("Choose word category or leave an empty input to skip this setting:");
             System.out.println("1 - Animals");
@@ -146,32 +145,47 @@ public class Console {
             System.out.println("6 - Technology");
             System.out.println("7 - Emotions");
             System.out.println("8 - Jobs");
-            System.out.print("\nYour input> ");
+            AppService.printInput();
 
-            String choice = Console.scanner.nextLine();
+            String choice = AppService.SCANNER.nextLine();
             System.out.println();
+            Category category = Category.ANIMALS;
+            boolean flag = true;
 
             switch (choice) {
                 case "1":
-                    return Category.ANIMALS;
+                    category = Category.ANIMALS;
+                    break;
                 case "2":
-                    return Category.FOOD;
+                    category = Category.FOOD;
+                    break;
                 case "3":
-                    return Category.CLOTHES;
+                    category = Category.CLOTHES;
+                    break;
                 case "4":
-                    return Category.NATURE;
+                    category = Category.NATURE;
+                    break;
                 case "5":
-                    return Category.SPORTS;
+                    category = Category.SPORTS;
+                    break;
                 case "6":
-                    return Category.TECHNOLOGY;
+                    category = Category.TECHNOLOGY;
+                    break;
                 case "7":
-                    return Category.EMOTIONS;
+                    category = Category.EMOTIONS;
+                    break;
                 case "8":
-                    return Category.JOBS;
+                    category = Category.JOBS;
+                    break;
                 case "":
-                    return Category.values()[random.nextInt(0, 8)];
+                    category = Category.values()[AppService.SECURE_RANDOM.nextInt(Category.values().length)];
+                    break;
                 default:
-                    System.out.println("Invalid command.\n================");
+                    AppService.printInvalidCommand();
+                    flag = false;
+            }
+            if (flag) {
+                return category;
             }
         }
     }
