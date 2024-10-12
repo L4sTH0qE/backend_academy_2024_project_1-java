@@ -3,6 +3,8 @@ package backend.academy.utils;
 import backend.academy.model.Category;
 import backend.academy.model.Dictionary;
 import backend.academy.model.Difficulty;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,11 +16,26 @@ public final class Console {
     // Экземпляр словаря для получения слова для угадывания.
     private static Dictionary dictionary;
 
+    // Используем статическую мапу для получения уровня сложности по ключу-строке.
+    private static Map<String, Difficulty> difficultyMap = new HashMap<>();
+
+    // Используем статическую мапу для получения категории слова по ключу-строке.
+    private static Map<String, Category> categoryMap = new HashMap<>();
+
     /// Метод для отображения окна входа в программу.
     @SuppressWarnings("RegexpSinglelineJava")
     public static void start() throws Exception {
         try {
             dictionary = new Dictionary();
+
+            // Заполняем мапы.
+            for (Difficulty difficulty: Difficulty.values()) {
+                difficultyMap.put(String.valueOf(difficulty.ordinal() + 1), difficulty);
+            }
+            for (Category category: Category.values()) {
+                categoryMap.put(String.valueOf(category.ordinal() + 1), category);
+            }
+
             AppService.clear();
             System.out.println("Welcome to a Hangman game!\n==========================");
 
@@ -94,35 +111,22 @@ public final class Console {
         AppService.clear();
         while (true) {
             System.out.println("Choose difficulty or leave an empty input to skip this setting:");
-            System.out.println("1 - Easy");
-            System.out.println("2 - Medium");
-            System.out.println("3 - Hard");
+            printMap(difficultyMap);
             System.out.println("\n* Level of difficulty affects word to guess and number of attempts *");
             AppService.printInput();
 
             String choice = AppService.SCANNER.nextLine();
             System.out.println();
-            Difficulty difficulty = Difficulty.EASY;
-            boolean flag = true;
+            Difficulty difficulty;
 
-            switch (choice) {
-                case "1":
-                    difficulty = Difficulty.EASY;
-                    break;
-                case "2":
-                    difficulty = Difficulty.MEDIUM;
-                    break;
-                case "3":
-                    difficulty = Difficulty.HARD;
-                    break;
-                case "":
-                    difficulty = Difficulty.values()[AppService.SECURE_RANDOM.nextInt(Difficulty.values().length)];
-                    break;
-                default:
-                    AppService.printInvalidCommand();
-                    flag = false;
+            if (choice.isEmpty()) {
+                difficulty = Difficulty.values()[AppService.SECURE_RANDOM.nextInt(Difficulty.values().length)];
+            } else {
+                difficulty = difficultyMap.getOrDefault(choice, null);
             }
-            if (flag) {
+            if (difficulty == null) {
+                AppService.printInvalidCommand();
+            } else {
                 return difficulty;
             }
         }
@@ -134,56 +138,31 @@ public final class Console {
         AppService.clear();
         while (true) {
             System.out.println("Choose word category or leave an empty input to skip this setting:");
-            System.out.println("1 - Animals");
-            System.out.println("2 - Food");
-            System.out.println("3 - Clothes");
-            System.out.println("4 - Nature");
-            System.out.println("5 - Sports");
-            System.out.println("6 - Technology");
-            System.out.println("7 - Emotions");
-            System.out.println("8 - Jobs");
+            printMap(categoryMap);
             AppService.printInput();
 
             String choice = AppService.SCANNER.nextLine();
             System.out.println();
-            Category category = Category.ANIMALS;
-            boolean flag = true;
+            Category category;
 
-            switch (choice) {
-                case "1":
-                    category = Category.ANIMALS;
-                    break;
-                case "2":
-                    category = Category.FOOD;
-                    break;
-                case "3":
-                    category = Category.CLOTHES;
-                    break;
-                case "4":
-                    category = Category.NATURE;
-                    break;
-                case "5":
-                    category = Category.SPORTS;
-                    break;
-                case "6":
-                    category = Category.TECHNOLOGY;
-                    break;
-                case "7":
-                    category = Category.EMOTIONS;
-                    break;
-                case "8":
-                    category = Category.JOBS;
-                    break;
-                case "":
-                    category = Category.values()[AppService.SECURE_RANDOM.nextInt(Category.values().length)];
-                    break;
-                default:
-                    AppService.printInvalidCommand();
-                    flag = false;
+            if (choice.isEmpty()) {
+                category = Category.values()[AppService.SECURE_RANDOM.nextInt(Category.values().length)];
+            } else {
+                category = categoryMap.getOrDefault(choice, null);
             }
-            if (flag) {
+            if (category == null) {
+                AppService.printInvalidCommand();
+            } else {
                 return category;
             }
+        }
+    }
+
+    /// Метод для вывода сообщения обо всех значениях в мапе с их ключами.
+    @SuppressWarnings("RegexpSinglelineJava")
+    private static <T extends Enum<T>> void printMap(Map<String, T> enumMap) {
+        for (Map.Entry<String, T> entry : enumMap.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue().name());
         }
     }
 }
