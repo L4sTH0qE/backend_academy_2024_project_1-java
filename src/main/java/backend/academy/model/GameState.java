@@ -45,13 +45,12 @@ public class GameState {
 
     /// Метод для проверки, была ли буква уже угадана.
     public boolean tryGuessLetter(char ch) {
-        char letter = (ch >= 'a' && ch <= 'z') ? (char) (ch - 'a' + 'A') : ch;
-        return guessedLetters[letter - 'A'] != 1;
+        return guessedLetters[Character.toUpperCase(ch) - 'A'] != 1;
     }
 
     /// Метод для проверки нахождения буквы в слове.
     public boolean checkLetter(char ch) {
-        char letter = (ch >= 'a' && ch <= 'z') ? (char) (ch - 'a' + 'A') : ch;
+        char letter = Character.toUpperCase(ch);
         guessedLetters[letter - 'A'] = 1;
         boolean flag = false;
         for (int i = 0; i < correctWord.length(); ++i) {
