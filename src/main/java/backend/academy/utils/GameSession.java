@@ -1,6 +1,5 @@
 package backend.academy.utils;
 
-import backend.academy.model.Difficulty;
 import backend.academy.model.GameState;
 import backend.academy.model.Word;
 import lombok.Getter;
@@ -9,13 +8,6 @@ import lombok.experimental.UtilityClass;
 /// Класс GameSession для реализации игрового процесса.
 @UtilityClass
 public final class GameSession {
-
-    // Константы для описания количества попыток на разных уровнях сложности.
-    private static final int EASY_MAX_ATTEMPTS = 7;
-
-    private static final int MEDIUM_MAX_ATTEMPTS = 6;
-
-    private static final int HARD_MAX_ATTEMPTS = 5;
 
     // Объект для хранения информации о текущем состоянии игры.
     @Getter private static GameState gameState;
@@ -28,8 +20,7 @@ public final class GameSession {
             throw new IllegalArgumentException("Generated word has incorrect format! Please, try again later.");
         }
 
-        int attempts = word.difficulty() == Difficulty.EASY ? EASY_MAX_ATTEMPTS
-            : word.difficulty() == Difficulty.MEDIUM ? MEDIUM_MAX_ATTEMPTS : HARD_MAX_ATTEMPTS;
+        int attempts = word.difficulty().attempts();
         gameState = new GameState(attempts, word.word(), word.hint());
 
         while (true) {
