@@ -1,5 +1,6 @@
 package backend.academy.model;
 
+import java.util.Arrays;
 import lombok.Getter;
 
 /// Класс для описания текущего состояния, количества сделанных попыток,
@@ -38,9 +39,7 @@ public class GameState {
         this.isHintActive = false;
         currentWord = new char[correctWord.length()];
 
-        for (int i = 0; i < correctWord.length(); ++i) {
-            currentWord[i] = '_';
-        }
+        Arrays.fill(currentWord, '_');
     }
 
     /// Метод для проверки, была ли буква уже угадана.
