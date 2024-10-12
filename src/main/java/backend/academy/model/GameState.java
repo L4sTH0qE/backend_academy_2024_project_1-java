@@ -1,6 +1,7 @@
 package backend.academy.model;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 import lombok.Getter;
 
 /// Класс для описания текущего состояния, количества сделанных попыток,
@@ -26,10 +27,12 @@ public class GameState {
     private final String hint;
 
     // Плейсхолдер подсказки (если не активна).
-    private final String hintPlaceholder = "<Enter 1 if you want to get a hint>";
+    private static final String HINT_PLACEHOLDER = "<Enter 1 if you want to get a hint>";
 
     // Активна ли подсказка к слову для угадывания.
     private boolean isHintActive;
+
+    private static final char HIDDEN_LETTER = '_';
 
     /// Конструктор с инициализацией основных полей для описания состояния игры.
     public GameState(int attemptsLeft, String correctWord, String hint) {
@@ -39,7 +42,7 @@ public class GameState {
         this.isHintActive = false;
         currentWord = new char[correctWord.length()];
 
-        Arrays.fill(currentWord, '_');
+        Arrays.fill(currentWord, HIDDEN_LETTER);
     }
 
     /// Метод для проверки, была ли буква уже угадана.
@@ -69,13 +72,7 @@ public class GameState {
         if (attemptsLeft <= 0) {
             return true;
         }
-
-        for (char c : currentWord) {
-            if (c == '_') {
-                return false;
-            }
-        }
-        return true;
+        return IntStream.range(0, currentWord.length).noneMatch(i -> currentWord[i] == HIDDEN_LETTER);
     }
 
     /// Метод для получения строкового представления угаданных букв.
@@ -108,6 +105,6 @@ public class GameState {
         if (isHintActive) {
             return hint;
         }
-        return hintPlaceholder;
+        return HINT_PLACEHOLDER;
     }
 }
