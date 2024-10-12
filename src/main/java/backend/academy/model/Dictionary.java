@@ -18,12 +18,6 @@ public class Dictionary {
     // Словарь.
     private final List<Word> dictionary = new ArrayList<>(DICTIONARY_CAPACITY);
 
-    // Константы для описания полей слов из файла.
-    private static final int WORD_CATEGORY = 0;
-    private static final int WORD_WORD = 1;
-    private static final int WORD_DIFFICULTY = 2;
-    private static final int WORD_HINT = 3;
-
     /// Конструктор с заполнением словаря содержимым файла input.txt.
     public Dictionary() {
         updateWordlist();
@@ -37,10 +31,10 @@ public class Dictionary {
             // Парсим строки файла для заполнения словаря.
             while ((line = br.readLine()) != null) {
                 String[] wordLine = line.split(";");
-                Category category = Category.values()[Integer.parseInt(wordLine[WORD_CATEGORY])];
-                String word = wordLine[WORD_WORD];
-                Difficulty difficulty = Difficulty.values()[Integer.parseInt(wordLine[WORD_DIFFICULTY])];
-                String hint = wordLine[WORD_HINT];
+                Category category = Category.values()[Integer.parseInt(wordLine[WordInfo.CATEGORY.ordinal()])];
+                String word = wordLine[WordInfo.WORD.ordinal()];
+                Difficulty difficulty = Difficulty.values()[Integer.parseInt(wordLine[WordInfo.DIFFICULTY.ordinal()])];
+                String hint = wordLine[WordInfo.HINT.ordinal()];
                 dictionary.add(new Word(category, word, difficulty, hint));
             }
         } catch (IOException ex) {
