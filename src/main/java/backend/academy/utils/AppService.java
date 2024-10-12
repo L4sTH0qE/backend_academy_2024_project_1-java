@@ -3,13 +3,11 @@ package backend.academy.utils;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Scanner;
+import lombok.experimental.UtilityClass;
 
 /// Вспомогательный класс для выделения полей и методов, необходимых для нескольких классов в отдельную сущность.
+@UtilityClass
 public final class AppService {
-
-    // Конструктор.
-    private AppService() {
-    }
 
     // Для получения ввода пользователя используется объект типа Scanner из состава JDK(JRE) API
     // Для инициализации SCANNER'а используется объект стандартного потока ввода - System.in

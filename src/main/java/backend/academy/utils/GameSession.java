@@ -4,13 +4,11 @@ import backend.academy.model.Difficulty;
 import backend.academy.model.GameState;
 import backend.academy.model.Word;
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 
 /// Класс GameSession для реализации игрового процесса.
+@UtilityClass
 public final class GameSession {
-
-    // Конструктор.
-    private GameSession() {
-    }
 
     // Константы для описания количества попыток на разных уровнях сложности.
     private static final int EASY_MAX_ATTEMPTS = 7;

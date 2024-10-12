@@ -3,15 +3,13 @@ package backend.academy.utils;
 import backend.academy.model.Category;
 import backend.academy.model.Dictionary;
 import backend.academy.model.Difficulty;
+import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 
 /// Основной класс Console для работы приложения.
 @Log4j2
+@UtilityClass
 public final class Console {
-
-    // Конструктор.
-    private Console() {
-    }
 
     // Экземпляр словаря для получения слова для угадывания.
     private static Dictionary dictionary;
