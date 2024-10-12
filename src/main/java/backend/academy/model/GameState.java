@@ -54,21 +54,21 @@ public class GameState {
     public boolean checkLetter(char ch) {
         char letter = Character.toUpperCase(ch);
         guessedLetters[letter - 'A'] = 1;
-        boolean flag = false;
+        boolean isValidLetter = false;
         for (int i = 0; i < correctWord.length(); ++i) {
             if (correctWord.charAt(i) == letter) {
-                flag = true;
+                isValidLetter = true;
                 currentWord[i] = letter;
             }
         }
-        if (!flag) {
+        if (!isValidLetter) {
             --attemptsLeft;
         }
-        return flag;
+        return isValidLetter;
     }
 
     /// Метод для проверки, была ли окончена игровая сессия.
-    public boolean checkGameStatus() {
+    public boolean isGameFinished() {
         if (attemptsLeft <= 0) {
             return true;
         }

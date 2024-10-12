@@ -67,7 +67,7 @@ public final class GameSession {
                 } else {
                     System.out.println("Incorrect letter!\n=================");
                 }
-                if (gameState.checkGameStatus()) {
+                if (gameState.isGameFinished()) {
                     break;
                 }
                 continue;

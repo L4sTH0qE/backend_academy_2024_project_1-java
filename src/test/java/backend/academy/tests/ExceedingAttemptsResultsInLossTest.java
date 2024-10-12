@@ -11,32 +11,32 @@ public class ExceedingAttemptsResultsInLossTest {
     void checkFirstExceedingCase() {
         GameState gameState = new GameState(3, "Cat", "Hint");
         assertThat(gameState.attemptsLeft()).isEqualTo(3);
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('Q');
         assertThat(gameState.attemptsLeft()).isEqualTo(2);
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('W');
         assertThat(gameState.attemptsLeft()).isEqualTo(1);
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('E');
         assertThat(gameState.attemptsLeft()).isEqualTo(0);
-        assertThat(gameState.checkGameStatus()).isEqualTo(true);
+        assertThat(gameState.isGameFinished()).isEqualTo(true);
     }
 
     @Test
     void checkSecondExceedingCase() {
         GameState gameState = new GameState(0, "Cat", "Hint");
         assertThat(gameState.attemptsLeft()).isEqualTo(0);
-        assertThat(gameState.checkGameStatus()).isEqualTo(true);
+        assertThat(gameState.isGameFinished()).isEqualTo(true);
     }
 
     @Test
     void checkThirdExceedingCase() {
         GameState gameState = new GameState(-1, "Cat", "Hint");
         assertThat(gameState.attemptsLeft()).isEqualTo(-1);
-        assertThat(gameState.checkGameStatus()).isEqualTo(true);
+        assertThat(gameState.isGameFinished()).isEqualTo(true);
     }
 }

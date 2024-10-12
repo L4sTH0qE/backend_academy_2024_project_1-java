@@ -19,22 +19,22 @@ public class GameStateChangesOnGuessTest {
     void checkWordStatus() {
         gameState.checkLetter('W');
         assertThat(gameState.attemptsLeft()).isEqualTo(2);
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('C');
         assertThat(gameState.attemptsLeft()).isEqualTo(2);
         assertThat(gameState.currentWord()[0]).isEqualTo('C');
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('A');
         assertThat(gameState.attemptsLeft()).isEqualTo(2);
         assertThat(gameState.currentWord()[1]).isEqualTo('A');
-        assertThat(gameState.checkGameStatus()).isEqualTo(false);
+        assertThat(gameState.isGameFinished()).isEqualTo(false);
 
         gameState.checkLetter('T');
         assertThat(gameState.attemptsLeft()).isEqualTo(2);
         assertThat(gameState.currentWord()[2]).isEqualTo('T');
-        assertThat(gameState.checkGameStatus()).isEqualTo(true);
+        assertThat(gameState.isGameFinished()).isEqualTo(true);
     }
 
     @Test
