@@ -3,14 +3,23 @@ package backend.academy.tests;
 import backend.academy.model.Category;
 import backend.academy.model.Dictionary;
 import backend.academy.model.Difficulty;
+import backend.academy.model.FileDictionary;
 import backend.academy.model.Word;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import java.nio.file.Paths;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /// Проверка правильности выбора слова из списка для всех категорий и сложностей.
 public class SelectWordFromListTest {
-    Dictionary dictionary = new Dictionary();
+    Dictionary dictionary;
+
+    @BeforeEach
+    void setUp() {
+        dictionary = new FileDictionary(Paths.get("data/input.txt"));
+        dictionary.updateWordlist();
+    }
 
     @ParameterizedTest
     @EnumSource(Category.class)

@@ -3,6 +3,9 @@ package backend.academy.utils;
 import backend.academy.model.Category;
 import backend.academy.model.Dictionary;
 import backend.academy.model.Difficulty;
+import backend.academy.model.FileDictionary;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.experimental.UtilityClass;
@@ -24,9 +27,18 @@ public final class Console {
 
     /// Метод для отображения окна входа в программу.
     @SuppressWarnings("RegexpSinglelineJava")
-    public static void start() throws Exception {
+    public static void start(String[] args) throws Exception {
         try {
-            dictionary = new Dictionary();
+            // Механика заполнения словаря для игры словами из файла, указанного в args.
+            String filePath = args[0];
+            Path basePath = Paths.get("data/");
+            Path resolvedPath = basePath.resolve(filePath).normalize();
+            if (!resolvedPath.startsWith(basePath)) {
+                throw new Exception("Invalid file path");
+            }
+
+            dictionary = new FileDictionary(resolvedPath);
+            dictionary.updateWordlist();
 
             // Заполняем мапы.
             for (Difficulty difficulty: Difficulty.values()) {
