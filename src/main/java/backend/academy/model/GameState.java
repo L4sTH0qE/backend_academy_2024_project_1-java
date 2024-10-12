@@ -92,19 +92,17 @@ public class GameState {
     }
 
     /// Метод для обновления статуса отображения подсказки (если еще не была обновлена).
-    public boolean updateHintStatus() {
+    public boolean activateHint() {
         if (!isHintActive) {
             isHintActive = true;
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /// Метод для получения подсказки (или плейсхолдер, если подсказка еще не использована).
     public String getHint() {
-        if (isHintActive) {
-            return hint;
-        }
-        return HINT_PLACEHOLDER;
+        return isHintActive ? hint : HINT_PLACEHOLDER;
     }
 }

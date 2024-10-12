@@ -48,7 +48,7 @@ public final class GameSession {
             }
             char letter = choice.charAt(0);
             if (letter == '1') {
-                boolean flag = gameState.updateHintStatus();
+                boolean flag = gameState.activateHint();
                 if (!flag) {
                     System.out.println("Hint is already activated!\n==========================");
                 } else {

@@ -40,8 +40,8 @@ public class GameStateChangesOnGuessTest {
     @Test
     void checkHintStatus() {
         assertThat(gameState.getHint()).isNotEqualTo("Hint");
-        assertThat(gameState.updateHintStatus()).isEqualTo(true);
-        assertThat(gameState.updateHintStatus()).isEqualTo(false);
+        assertThat(gameState.activateHint()).isEqualTo(true);
+        assertThat(gameState.activateHint()).isEqualTo(false);
         assertThat(gameState.getHint()).isEqualTo("Hint");
     }
 }
