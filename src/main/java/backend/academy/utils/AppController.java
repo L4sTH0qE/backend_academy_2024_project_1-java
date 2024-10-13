@@ -146,7 +146,7 @@ public final class AppController {
     }
 
     /// Метод для инициализации основных полей для работы с меню игры.
-    public void initialiseData(String[] args) throws Exception {
+    public static void initialiseData(String[] args) throws Exception {
         // Механика заполнения словаря для игры словами из файла, указанного в args.
         String filePath = args[0];
         Path basePath = Paths.get("data/");

@@ -6,13 +6,13 @@ import backend.academy.view.GameView;
 import lombok.Getter;
 
 /// Класс GameController для взаимодействия между GameModel и GameView (логикой игры и ее отображением в консоли).
-public final class GameController {
+@Getter public final class GameController {
 
     // Объект для хранения информации о текущем состоянии игры.
-    @Getter private GameModel gameModel;
+    private GameModel gameModel;
 
     // Объект для отображения текущего состояния игры.
-    @Getter private GameView gameView;
+    private GameView gameView;
 
     // Конструктор.
     public GameController(GameModel gameModel, GameView gameView) {

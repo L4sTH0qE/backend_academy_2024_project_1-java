@@ -10,6 +10,12 @@ public class GameModel {
     // Константа для описания длины алфавита для игры (латинского).
     private static final int ALPHABET_LENGTH = 26;
 
+    // Плейсхолдер подсказки (если не активна).
+    private static final String HINT_PLACEHOLDER = "<Enter 1 if you want to get a hint>";
+
+    // Символ для отображения неугаданной буквы.
+    private static final char HIDDEN_LETTER = '_';
+
     // Угаданные буквы.
     private int[] guessedLetters = new int[ALPHABET_LENGTH];
 
@@ -25,13 +31,8 @@ public class GameModel {
     // Подсказка к слову для угадывания.
     private final String hint;
 
-    // Плейсхолдер подсказки (если не активна).
-    private static final String HINT_PLACEHOLDER = "<Enter 1 if you want to get a hint>";
-
     // Активна ли подсказка к слову для угадывания.
     private boolean isHintActive;
-
-    private static final char HIDDEN_LETTER = '_';
 
     /// Конструктор с инициализацией основных полей для описания состояния игры.
     public GameModel(int attemptsLeft, String correctWord, String hint) {
