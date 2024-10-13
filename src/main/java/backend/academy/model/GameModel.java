@@ -4,9 +4,8 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 import lombok.Getter;
 
-/// Класс для описания текущего состояния, количества сделанных попыток,
-/// максимального количества попыток и сообщений для пользователя.
-public class GameState {
+/// Класс GameModel для описания логики игры и текущего состояния виселицы.
+public class GameModel {
 
     // Константа для описания длины алфавита для игры (латинского).
     private static final int ALPHABET_LENGTH = 26;
@@ -35,7 +34,7 @@ public class GameState {
     private static final char HIDDEN_LETTER = '_';
 
     /// Конструктор с инициализацией основных полей для описания состояния игры.
-    public GameState(int attemptsLeft, String correctWord, String hint) {
+    public GameModel(int attemptsLeft, String correctWord, String hint) {
         this.attemptsLeft = attemptsLeft;
         this.correctWord = correctWord.toUpperCase();
         this.hint = hint;
@@ -104,5 +103,10 @@ public class GameState {
     /// Метод для получения подсказки (или плейсхолдер, если подсказка еще не использована).
     public String getHint() {
         return isHintActive ? hint : HINT_PLACEHOLDER;
+    }
+
+    /// Метод для получения загаданного слова.
+    public String getWord() {
+        return correctWord;
     }
 }

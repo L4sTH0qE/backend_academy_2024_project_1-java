@@ -5,7 +5,7 @@ package backend.academy.model;
 public interface Dictionary {
 
     /// Метод для заполнения словаря заданным способом.
-    void updateWordlist();
+    void updateWordlist() throws Exception;
 
     /// Метод для получения случайного слова из словаря по заданным сложности и категории.
     Word getRandomWord(Difficulty difficulty, Category category);

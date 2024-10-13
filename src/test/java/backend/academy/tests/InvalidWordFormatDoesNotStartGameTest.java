@@ -2,8 +2,10 @@ package backend.academy.tests;
 
 import backend.academy.model.Category;
 import backend.academy.model.Difficulty;
+import backend.academy.model.GameModel;
 import backend.academy.model.Word;
-import backend.academy.utils.GameSession;
+import backend.academy.utils.GameController;
+import backend.academy.view.GameView;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,10 +15,14 @@ public class InvalidWordFormatDoesNotStartGameTest {
     Word incorrectWord = new Word(Category.ANIMALS, "1NCLUDES_OTH3R_SYMB*LS", Difficulty.EASY, "");
     Word longWord = new Word(Category.ANIMALS, "TWO MANY WORDS", Difficulty.EASY, "");
 
+    GameController gameControllerShort = new GameController(new GameModel(shortWord.difficulty().attempts(), shortWord.word(), shortWord.hint()), new GameView());
+    GameController gameControllerIncorrect = new GameController(new GameModel(incorrectWord.difficulty().attempts(), incorrectWord.word(), incorrectWord.hint()), new GameView());
+    GameController gameControllerLong = new GameController(new GameModel(longWord.difficulty().attempts(), longWord.word(), longWord.hint()), new GameView());
+
     @Test
     void testInvalidWordFormat() {
-        assertThrows(IllegalArgumentException.class, () -> GameSession.startGame(shortWord));
-        assertThrows(IllegalArgumentException.class, () -> GameSession.startGame(incorrectWord));
-        assertThrows(IllegalArgumentException.class, () -> GameSession.startGame(longWord));
+        assertThrows(IllegalArgumentException.class, () -> gameControllerShort.startGame());
+        assertThrows(IllegalArgumentException.class, () -> gameControllerIncorrect.startGame());
+        assertThrows(IllegalArgumentException.class, () -> gameControllerLong.startGame());
     }
 }

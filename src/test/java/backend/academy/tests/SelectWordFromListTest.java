@@ -17,8 +17,11 @@ public class SelectWordFromListTest {
 
     @BeforeEach
     void setUp() {
-        dictionary = new FileDictionary(Paths.get("data/input.txt"));
-        dictionary.updateWordlist();
+        try {
+            dictionary = new FileDictionary(Paths.get("data/input.txt"));
+            dictionary.updateWordlist();
+        } catch (Exception _) {
+        }
     }
 
     @ParameterizedTest

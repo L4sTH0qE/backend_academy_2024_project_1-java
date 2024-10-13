@@ -1,6 +1,6 @@
 package backend.academy.tests;
 
-import backend.academy.utils.GameSession;
+import backend.academy.view.GameView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,8 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /// Проверка корректности отображения состояния игры после каждого ввода пользователя.
-public class GameStateAfterUserInputTest {
+public class GameModelAfterUserInputTest {
+    GameView gameView = new GameView();
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -27,7 +28,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testFirstDisplayAfterUserInput() {
-        GameSession.drawHangman(7);
+        gameView.drawHangman(7);
         assertEquals("""
                 +---+
                     |
@@ -40,7 +41,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testSecondDisplayAfterUserInput() {
-        GameSession.drawHangman(6);
+        gameView.drawHangman(6);
         assertEquals("""
                 +---+
                 |   |
@@ -53,7 +54,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testThirdDisplayAfterUserInput() {
-        GameSession.drawHangman(5);
+        gameView.drawHangman(5);
         assertEquals("""
                 +---+
                 |   |
@@ -66,7 +67,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testFourthDisplayAfterUserInput() {
-        GameSession.drawHangman(4);
+        gameView.drawHangman(4);
         assertEquals("""
                 +---+
                 |   |
@@ -79,7 +80,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testFifthDisplayAfterUserInput() {
-        GameSession.drawHangman(3);
+        gameView.drawHangman(3);
         assertEquals("""
                +---+
                 |   |
@@ -92,7 +93,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testSixthDisplayAfterUserInput() {
-        GameSession.drawHangman(2);
+        gameView.drawHangman(2);
         assertEquals("""
                +---+
                 |   |
@@ -105,7 +106,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testSeventhDisplayAfterUserInput() {
-        GameSession.drawHangman(1);
+        gameView.drawHangman(1);
         assertEquals("""
                +---+
                 |   |
@@ -118,7 +119,7 @@ public class GameStateAfterUserInputTest {
 
     @Test
     void testEighthDisplayAfterUserInput() {
-        GameSession.drawHangman(0);
+        gameView.drawHangman(0);
         assertEquals("""
                +---+
                 |   |
