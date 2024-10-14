@@ -21,8 +21,8 @@ public class InvalidWordFormatDoesNotStartGameTest {
 
     @Test
     void testInvalidWordFormat() {
-        assertThrows(IllegalArgumentException.class, () -> gameControllerShort.startGame());
-        assertThrows(IllegalArgumentException.class, () -> gameControllerIncorrect.startGame());
-        assertThrows(IllegalArgumentException.class, () -> gameControllerLong.startGame());
+        assertThrows(IllegalStateException.class, () -> gameControllerShort.startGame());
+        assertThrows(IllegalStateException.class, () -> gameControllerIncorrect.startGame());
+        assertThrows(IllegalStateException.class, () -> gameControllerLong.startGame());
     }
 }

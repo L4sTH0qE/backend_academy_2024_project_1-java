@@ -18,6 +18,7 @@ public class Main {
             AppController.start();
         } catch (Exception ex) { // Если возникла ошибка во время работы программы.
             log.error("An unexpected error occurred while the program was running!");
+            log.error("Details: {}", ex.getMessage());
             AppController.exit();
         }
     }

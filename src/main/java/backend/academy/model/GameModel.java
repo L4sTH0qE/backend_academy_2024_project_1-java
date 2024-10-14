@@ -17,13 +17,13 @@ public class GameModel {
     private static final char HIDDEN_LETTER = '_';
 
     // Угаданные буквы.
-    private int[] guessedLetters = new int[ALPHABET_LENGTH];
+    private final int[] guessedLetters = new int[ALPHABET_LENGTH];
 
     // Количество оставшихся попыток.
     @Getter private int attemptsLeft;
 
     // Текущее состояние угадываемого слова.
-    @Getter private char[] currentWord;
+    @Getter private final char[] currentWord;
 
     // Слово для угадывания.
     private final String correctWord;

@@ -8,6 +8,7 @@ import backend.academy.model.GameModel;
 import backend.academy.model.Word;
 import backend.academy.view.AppView;
 import backend.academy.view.GameView;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,18 +31,18 @@ public final class AppController {
     // Экземпляр для генерации хорошего случайного числа.
     public static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
+    // Используем статическую мапу для получения уровня сложности по ключу-строке.
+    private static final Map<String, Difficulty> DIFFICULTY_MAP = new HashMap<>();
+
+    // Используем статическую мапу для получения категории слова по ключу-строке.
+    private static final Map<String, Category> CATEGORY_MAP = new HashMap<>();
+
     // Экземпляр словаря для получения слова для угадывания.
     private static Dictionary dictionary;
 
-    // Используем статическую мапу для получения уровня сложности по ключу-строке.
-    private static Map<String, Difficulty> difficultyMap = new HashMap<>();
-
-    // Используем статическую мапу для получения категории слова по ключу-строке.
-    private static Map<String, Category> categoryMap = new HashMap<>();
-
     /// Метод для отображения окна входа в программу.
     @SuppressWarnings("RegexpSinglelineJava")
-    public static void start() throws Exception {
+    public static void start() {
         try {
             AppView.clear();
             AppView.printEntryMessage();
@@ -51,7 +52,7 @@ public final class AppController {
                 String choice = AppView.getOptionFromUser(SCANNER);
                 switch (choice) {
                     case "1":
-                        selectContent();
+                        initialiseGame();
                         break;
                     case "q", "Q":
                         AppController.exit();
@@ -70,7 +71,7 @@ public final class AppController {
 
     /// Метод для получения слова для новой игры.
     @SuppressWarnings("RegexpSinglelineJava")
-    private static void selectContent() throws Exception {
+    private static Word selectContent() {
         AppView.clear();
         boolean settingsFlag = false;
         Difficulty difficulty;
@@ -95,26 +96,21 @@ public final class AppController {
                 }
             } while (!choiceFlag);
         } while (!settingsFlag);
-        AppView.clear();
-        Word word = dictionary.getRandomWord(difficulty, category);
-        GameModel gameModel = new GameModel(word.difficulty().attempts(), word.word(), word.hint());
-        GameView gameView = new GameView();
-        GameController gameController = new GameController(gameModel, gameView);
-        gameController.startGame();
+        return dictionary.getRandomWord(difficulty, category);
     }
 
     /// Метод для получения уровня сложности для новой игры.
     @SuppressWarnings("RegexpSinglelineJava")
-    private static Difficulty getDifficulty() throws Exception {
+    private static Difficulty getDifficulty() {
         AppView.clear();
         while (true) {
-            String choice = AppView.getDifficultyFromUser(difficultyMap, SCANNER);
+            String choice = AppView.getDifficultyFromUser(DIFFICULTY_MAP, SCANNER);
             Difficulty difficulty;
 
             if (choice.isEmpty()) {
                 difficulty = Difficulty.values()[SECURE_RANDOM.nextInt(Difficulty.values().length)];
             } else {
-                difficulty = difficultyMap.getOrDefault(choice, null);
+                difficulty = DIFFICULTY_MAP.getOrDefault(choice, null);
             }
             if (difficulty == null) {
                 AppView.printInvalidCommand();
@@ -126,16 +122,16 @@ public final class AppController {
 
     /// Метод для получения категории слова для новой игры.
     @SuppressWarnings("RegexpSinglelineJava")
-    private static Category getCategory() throws Exception {
+    private static Category getCategory() {
         AppView.clear();
         while (true) {
-            String choice = AppView.getCategoryFromUser(categoryMap, SCANNER);
+            String choice = AppView.getCategoryFromUser(CATEGORY_MAP, SCANNER);
             Category category;
 
             if (choice.isEmpty()) {
                 category = Category.values()[SECURE_RANDOM.nextInt(Category.values().length)];
             } else {
-                category = categoryMap.getOrDefault(choice, null);
+                category = CATEGORY_MAP.getOrDefault(choice, null);
             }
             if (category == null) {
                 AppView.printInvalidCommand();
@@ -145,14 +141,24 @@ public final class AppController {
         }
     }
 
+    /// Метод для инициализации игровой сессии.
+    private static void initialiseGame() {
+        Word word = selectContent();
+        AppView.clear();
+        GameModel gameModel = new GameModel(word.difficulty().attempts(), word.word(), word.hint());
+        GameView gameView = new GameView();
+        GameController gameController = new GameController(gameModel, gameView);
+        gameController.startGame();
+    }
+
     /// Метод для инициализации основных полей для работы с меню игры.
-    public static void initialiseData(String[] args) throws Exception {
+    public static void initialiseData(String[] args) throws IOException {
         // Механика заполнения словаря для игры словами из файла, указанного в args.
         String filePath = args[0];
         Path basePath = Paths.get("data/");
         Path resolvedPath = basePath.resolve(filePath).normalize();
         if (!resolvedPath.startsWith(basePath)) {
-            throw new Exception("Invalid file path");
+            throw new SecurityException("Invalid path to file with words (file must be inside data directory)!");
         }
 
         dictionary = new FileDictionary(resolvedPath);
@@ -160,10 +166,10 @@ public final class AppController {
 
         // Заполняем мапы.
         for (Difficulty difficulty: Difficulty.values()) {
-            difficultyMap.put(String.valueOf(difficulty.ordinal() + 1), difficulty);
+            DIFFICULTY_MAP.put(String.valueOf(difficulty.ordinal() + 1), difficulty);
         }
         for (Category category: Category.values()) {
-            categoryMap.put(String.valueOf(category.ordinal() + 1), category);
+            CATEGORY_MAP.put(String.valueOf(category.ordinal() + 1), category);
         }
     }
 
