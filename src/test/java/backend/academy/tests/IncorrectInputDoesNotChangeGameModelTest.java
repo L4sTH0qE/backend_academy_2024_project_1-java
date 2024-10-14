@@ -16,9 +16,13 @@ public class IncorrectInputDoesNotChangeGameModelTest {
     String longInput = "LONGINPUT";
 
     @Test
-    void testUserInputFormat() {
+    void testCorrectUserInputFormat() {
         assertThat(gameController.checkUserInput(hintInput)).isEqualTo(true);
         assertThat(gameController.checkUserInput(letterInput)).isEqualTo(true);
+    }
+
+    @Test
+    void testIncorrectUserInputFormat() {
         assertThat(gameController.checkUserInput(symbolInput)).isEqualTo(false);
         assertThat(gameController.checkUserInput(longInput)).isEqualTo(false);
     }

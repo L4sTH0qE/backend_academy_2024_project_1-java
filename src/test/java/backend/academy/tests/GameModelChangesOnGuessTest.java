@@ -16,32 +16,41 @@ public class GameModelChangesOnGuessTest {
     }
 
     @Test
-    void checkWordStatus() {
+    void checkFalseLetterWordStatus() {
         gameModel.checkLetter('W');
         assertThat(gameModel.attemptsLeft()).isEqualTo(2);
         assertThat(gameModel.isGameFinished()).isEqualTo(false);
+    }
 
+    @Test
+    void checkTrueLetterWordStatus() {
         gameModel.checkLetter('C');
-        assertThat(gameModel.attemptsLeft()).isEqualTo(2);
-        assertThat(gameModel.currentWord()[0]).isEqualTo('C');
+        assertThat(gameModel.attemptsLeft()).isEqualTo(3);
         assertThat(gameModel.isGameFinished()).isEqualTo(false);
+    }
 
+    @Test
+    void checkTrueLastLetterWordStatus() {
+        gameModel.checkLetter('C');
         gameModel.checkLetter('A');
-        assertThat(gameModel.attemptsLeft()).isEqualTo(2);
-        assertThat(gameModel.currentWord()[1]).isEqualTo('A');
-        assertThat(gameModel.isGameFinished()).isEqualTo(false);
-
         gameModel.checkLetter('T');
-        assertThat(gameModel.attemptsLeft()).isEqualTo(2);
+        assertThat(gameModel.attemptsLeft()).isEqualTo(3);
+        assertThat(gameModel.currentWord()[0]).isEqualTo('C');
+        assertThat(gameModel.currentWord()[1]).isEqualTo('A');
         assertThat(gameModel.currentWord()[2]).isEqualTo('T');
         assertThat(gameModel.isGameFinished()).isEqualTo(true);
     }
 
     @Test
-    void checkHintStatus() {
-        assertThat(gameModel.getHint()).isNotEqualTo("Hint");
+    void checkTrueActivationHintStatus() {
         assertThat(gameModel.activateHint()).isEqualTo(true);
-        assertThat(gameModel.activateHint()).isEqualTo(false);
         assertThat(gameModel.getHint()).isEqualTo("Hint");
+    }
+
+    @Test
+    void checkFalseActivationHintStatus() {
+        assertThat(gameModel.getHint()).isNotEqualTo("Hint");
+        gameModel.activateHint();
+        assertThat(gameModel.activateHint()).isEqualTo(false);
     }
 }

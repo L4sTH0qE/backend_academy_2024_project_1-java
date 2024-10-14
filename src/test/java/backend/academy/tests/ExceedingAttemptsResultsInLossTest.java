@@ -20,21 +20,25 @@ public class ExceedingAttemptsResultsInLossTest {
         gameModel.checkLetter('W');
         assertThat(gameModel.attemptsLeft()).isEqualTo(1);
         assertThat(gameModel.isGameFinished()).isEqualTo(false);
+    }
 
+    @Test
+    void checkSecondExceedingCase() {
+        GameModel gameModel = new GameModel(1, "Cat", "Hint");
         gameModel.checkLetter('E');
         assertThat(gameModel.attemptsLeft()).isEqualTo(0);
         assertThat(gameModel.isGameFinished()).isEqualTo(true);
     }
 
     @Test
-    void checkSecondExceedingCase() {
+    void checkThirdExceedingCase() {
         GameModel gameModel = new GameModel(0, "Cat", "Hint");
         assertThat(gameModel.attemptsLeft()).isEqualTo(0);
         assertThat(gameModel.isGameFinished()).isEqualTo(true);
     }
 
     @Test
-    void checkThirdExceedingCase() {
+    void checkFourthExceedingCase() {
         GameModel gameModel = new GameModel(-1, "Cat", "Hint");
         assertThat(gameModel.attemptsLeft()).isEqualTo(-1);
         assertThat(gameModel.isGameFinished()).isEqualTo(true);
